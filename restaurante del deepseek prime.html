@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trattoria Bella Vita - Auténtica Cocina Italiana</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #8B0000;
+            --color-secondary: #D4AF37;
+            --color-dark: #222222;
+            --color-light: #F8F8F8;
+            --color-text: #333333;
+            --color-white: #FFFFFF;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            color: var(--color-text);
+            background-color: var(--color-white);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--color-dark);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--color-primary);
+            margin: 15px auto 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border: none;
+            border-radius: 30px;
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--color-secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--color-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 5px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--color-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-menu a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--color-primary);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover:after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--color-dark);
+        }
+
+        /* Banner */
+        .banner {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color-white);
+            padding: 0 20px;
+        }
+
+        .banner-content {
+            max-width: 800px;
+        }
+
+        .banner h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .banner p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Destacados */
+        .destacados {
+            background-color: var(--color-light);
+        }
+
+        .platos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .plato-card {
+            background-color: var(--color-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .plato-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .plato-img {
+            height: 200px;
+            width: 100%;
+            background-color: #ddd;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .plato-content {
+            padding: 20px;
+        }
+
+        .plato-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--color-dark);
+        }
+
+        .plato-desc {
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .plato-precio {
+            font-weight: 600;
+            color: var(--color-primary);
+            font-size: 1.2rem;
+        }
+
+        /* Menú */
+        .menu-categorias {
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .categoria-btn {
+            padding: 10px 20px;
+            background-color: var(--color-white);
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .categoria-btn.active, .categoria-btn:hover {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            display: flex;
+            background-color: var(--color-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item-img {
+            width: 100px;
+            height: 100px;
+            background-color: #ddd;
+            background-position: center;
+            background-size: cover;
+            flex-shrink: 0;
+        }
+
+        .menu-item-content {
+            padding: 15px;
+            flex-grow: 1;
+        }
+
+        .menu-item-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .menu-item-name {
+            font-weight: 600;
+            color: var(--color-dark);
+        }
+
+        .menu-item-price {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .menu-item-desc {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Ubicación */
+        .ubicacion {
+            background-color: var(--color-light);
+        }
+
+        .ubicacion-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .ubicacion-info h3 {
+            color: var(--color-primary);
+            margin-bottom: 15px;
+        }
+
+        .ubicacion-info p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .ubicacion-info i {
+            margin-right: 10px;
+            color: var(--color-primary);
+        }
+
+        .mapa {
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .mapa iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Reservas */
+        .reservas-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            background: none;
+            border: none;
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: var(--color-primary);
+            border-bottom: 3px solid var(--color-primary);
+        }
+
+        .tab-content {
+            display: none;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--color-primary);
+            outline: none;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Contacto */
+        .contacto {
+            background-color: var(--color-light);
+        }
+
+        .contacto-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contacto-info h3 {
+            color: var(--color-primary);
+            margin-bottom: 20px;
+        }
+
+        .contacto-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contacto-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .redes-sociales {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .red-social {
+            width: 40px;
+            height: 40px;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .red-social:hover {
+            background-color: var(--color-secondary);
+            transform: translateY(-3px);
+        }
+
+        .contacto-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-dark);
+            color: var(--color-white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: 15px;
+        }
+
+        .footer-desc {
+            margin-bottom: 20px;
+            color: #aaa;
+        }
+
+        .footer-links h4 {
+            color: var(--color-white);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .ubicacion-content, .contacto-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--color-white);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 40px;
+                transition: var(--transition);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 15px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .banner h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .banner h1 {
+                font-size: 2rem;
+            }
+
+            .platos-grid, .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">Trattoria Bella Vita</a>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#destacados">Destacados</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#ubicacion">Ubicación</a></li>
+                <li><a href="#reservas">Reservas</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Banner Principal -->
+    <section class="banner" id="inicio">
+        <div class="banner-content">
+            <h1>Auténtica cocina italiana en el corazón de Puerto Madero</h1>
+            <p>Disfruta de los sabores tradicionales de Italia en un ambiente cálido y acogedor, donde cada plato cuenta una historia de pasión y tradición.</p>
+            <a href="#menu" class="btn">Ver Nuestro Menú</a>
+        </div>
+    </section>
+
+    <!-- Sección Destacados -->
+    <section class="section destacados" id="destacados">
+        <div class="container">
+            <h2 class="section-title">Nuestros Platos Más Pedidos</h2>
+            <div class="platos-grid">
+                <div class="plato-card">
+                    <div class="plato-img" style="background-image: url('https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="plato-content">
+                        <h3 class="plato-title">Lasagna alla Bolognese</h3>
+                        <p class="plato-desc">Deliciosas capas de pasta casera rellenas de carne, salsa boloñesa y queso, horneadas a la perfección.</p>
+                        <p class="plato-precio">$4.800</p>
+                    </div>
+                </div>
+                <div class="plato-card">
+                    <div class="plato-img" style="background-image: url('https://images.unsplash.com/photo-1476124369491-e7addf5db371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="plato-content">
+                        <h3 class="plato-title">Risotto ai Funghi</h3>
+                        <p class="plato-desc">Arroz cremoso cocinado con setas silvestres, vino blanco y queso parmesano, un clásico del norte de Italia.</p>
+                        <p class="plato-precio">$4.200</p>
+                    </div>
+                </div>
+                <div class="plato-card">
+                    <div class="plato-img" style="background-image: url('https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="plato-content">
+                        <h3 class="plato-title">Tagliatelle al Pesto</h3>
+                        <p class="plato-desc">Pasta fresca con nuestra salsa pesto genovés, elaborada con albahaca fresca, piñones, ajo y aceite de oliva.</p>
+                        <p class="plato-precio">$3.900</p>
+                    </div>
+                </div>
+                <div class="plato-card">
+                    <div class="plato-img" style="background-image: url('https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="plato-content">
+                        <h3 class="plato-title">Tiramisú Tradicional</h3>
+                        <p class="plato-desc">El postre italiano por excelencia: capas de bizcocho de soletilla empapado en café y crema de mascarpone.</p>
+                        <p class="plato-precio">$2.500</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Menú -->
+    <section class="section" id="menu">
+        <div class="container">
+            <h2 class="section-title">Nuestra Carta</h2>
+            <div class="menu-categorias">
+                <button class="categoria-btn active" data-categoria="entradas">Entradas</button>
+                <button class="categoria-btn" data-categoria="pastas">Pastas</button>
+                <button class="categoria-btn" data-categoria="carnes">Carnes y Pescados</button>
+                <button class="categoria-btn" data-categoria="postres">Postres</button>
+                <button class="categoria-btn" data-categoria="bebidas">Bebidas y Vinos</button>
+            </div>
+            <div class="menu-grid" id="menu-content">
+                <!-- Contenido cargado por JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Ubicación -->
+    <section class="section ubicacion" id="ubicacion">
+        <div class="container">
+            <h2 class="section-title">Ubicación y Horario</h2>
+            <div class="ubicacion-content">
+                <div class="ubicacion-info">
+                    <h3>Ven a visitarnos</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Alicia Moreau de Justo 1052, Puerto Madero, Buenos Aires</p>
+                    <p><i class="fas fa-clock"></i> Lunes a Domingo: 12:00 a 00:00</p>
+                    <p><i class="fas fa-phone"></i> (011) 4313-4546</p>
+                    <p><i class="fas fa-envelope"></i> contacto@bellavita.com</p>
+                    <p>Ubicados en el exclusivo barrio de Puerto Madero, ofrecemos un ambiente refinado con vistas al dique y la mejor gastronomía italiana de la ciudad.</p>
+                </div>
+                <div class="mapa">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.744905299535!2d-58.36384522420301!3d-34.61146545852752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a334d4f1d3812f%3A0x8b5c1b3b6b5b5b5b!2sPuerto%20Madero%2C%20CABA!5e0!3m2!1ses-419!2sar!4v1689200000000!5m2!1ses-419!2sar" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Reservas -->
+    <section class="section" id="reservas">
+        <div class="container">
+            <h2 class="section-title">Reservas</h2>
+            <div class="reservas-tabs">
+                <button class="tab-btn active" data-tab="comun">Reserva Común</button>
+                <button class="tab-btn" data-tab="vip">Reserva VIP</button>
+            </div>
+            <div class="tab-content active" id="comun-tab">
+                <form id="reserva-comun">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fecha-comun">Fecha</label>
+                            <input type="date" id="fecha-comun" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hora-comun">Hora</label>
+                            <input type="time" id="hora-comun" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="personas-comun">Cantidad de Personas</label>
+                        <select id="personas-comun" class="form-control" required>
+                            <option value="">Seleccione cantidad</option>
+                            <option value="1">1 persona</option>
+                            <option value="2">2 personas</option>
+                            <option value="3">3 personas</option>
+                            <option value="4">4 personas</option>
+                            <option value="5">5 personas</option>
+                            <option value="6">6 personas</option>
+                            <option value="7">7 personas</option>
+                            <option value="8">8 personas</option>
+                            <option value="9">9 personas o más</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="apellido-comun">Apellido</label>
+                            <input type="text" id="apellido-comun" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre-comun">Nombre</label>
+                            <input type="text" id="nombre-comun" class="form-control" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Enviar Reserva</button>
+                </form>
+            </div>
+            <div class="tab-content" id="vip-tab">
+                <form id="reserva-vip">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fecha-vip">Fecha</label>
+                            <input type="date" id="fecha-vip" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hora-vip">Hora</label>
+                            <input type="time" id="hora-vip" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="mesa-vip">N° de Mesa</label>
+                        <select id="mesa-vip" class="form-control" required>
+                            <option value="">Seleccione mesa</option>
+                            <option value="1">Mesa 1 (Vista al río)</option>
+                            <option value="2">Mesa 2 (Vista al río)</option>
+                            <option value="3">Mesa 3 (Zona privada)</option>
+                            <option value="4">Mesa 4 (Zona privada)</option>
+                            <option value="5">Mesa 5 (Terraza)</option>
+                            <option value="6">Mesa 6 (Terraza)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="personas-vip">Cantidad de Personas</label>
+                        <select id="personas-vip" class="form-control" required>
+                            <option value="">Seleccione cantidad</option>
+                            <option value="2">2 personas</option>
+                            <option value="4">4 personas</option>
+                            <option value="6">6 personas</option>
+                            <option value="8">8 personas</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dni-vip">DNI</label>
+                            <input type="text" id="dni-vip" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="apellido-vip">Apellido</label>
+                            <input type="text" id="apellido-vip" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre-vip">Nombre</label>
+                            <input type="text" id="nombre-vip" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sena-vip">Seña (monto)</label>
+                            <input type="number" id="sena-vip" class="form-control" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Enviar Reserva VIP</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section class="section contacto" id="contacto">
+        <div class="container">
+            <h2 class="section-title">Contacto</h2>
+            <div class="contacto-content">
+                <div class="contacto-info">
+                    <h3>Ponte en contacto con nosotros</h3>
+                    <div class="contacto-item">
+                        <div class="contacto-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4>Teléfono</h4>
+                            <p>(011) 4313-4546</p>
+                        </div>
+                    </div>
+                    <div class="contacto-item">
+                        <div class="contacto-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Correo Electrónico</h4>
+                            <p>contacto@bellavita.com</p>
+                        </div>
+                    </div>
+                    <div class="contacto-item">
+                        <div class="contacto-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Dirección</h4>
+                            <p>Alicia Moreau de Justo 1052<br>Puerto Madero, Buenos Aires</p>
+                        </div>
+                    </div>
+                    <div class="contacto-item">
+                        <div class="contacto-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4>Horario</h4>
+                            <p>Lunes a Domingo: 12:00 a 00:00</p>
+                        </div>
+                    </div>
+                    <div class="redes-sociales">
+                        <a href="#" class="red-social"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="red-social"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="red-social"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="red-social"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+                <div class="contacto-form">
+                    <form id="form-contacto">
+                        <div class="form-group">
+                            <label for="nombre-contacto">Nombre</label>
+                            <input type="text" id="nombre-contacto" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email-contacto">Correo Electrónico</label>
+                            <input type="email" id="email-contacto" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="asunto-contacto">Asunto</label>
+                            <input type="text" id="asunto-contacto" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje-contacto">Mensaje</label>
+                            <textarea id="mensaje-contacto" class="form-control" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">Trattoria Bella Vita</div>
+                    <p class="footer-desc">Un espacio donde la tradición culinaria italiana se encuentra con la elegancia contemporánea. Cada plato es una experiencia que transporta directamente a las regiones de Italia.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#destacados">Destacados</a></li>
+                        <li><a href="#menu">Menú</a></li>
+                        <li><a href="#ubicacion">Ubicación</a></li>
+                        <li><a href="#reservas">Reservas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Información</h4>
+                    <ul>
+                        <li><a href="#">Sobre Nosotros</a></li>
+                        <li><a href="#">Eventos Privados</a></li>
+                        <li><a href="#">Trabaja con Nosotros</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Trattoria Bella Vita – Proyecto educativo. Sitio no oficial.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Datos del menú
+        const menuData = {
+            entradas: [
+                { nombre: "Bruschetta al Pomodoro", precio: "$2.500", desc: "Pan tostado con tomate fresco, albahaca y aceite de oliva extra virgen.", img: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Antipasto della Casa", precio: "$4.200", desc: "Selección de embutidos italianos, quesos y vegetales a la parrilla.", img: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Carpaccio di Manzo", precio: "$4.800", desc: "Finas láminas de lomo con rúcula, parmesano y alcaparras.", img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Arancini di Riso", precio: "$3.200", desc: "Bolitas de arroz rellenas de queso mozzarella y guisantes, empanizadas y fritas.", img: "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" }
+            ],
+            pastas: [
+                { nombre: "Spaghetti Carbonara", precio: "$4.100", desc: "Spaghetti con salsa cremosa de huevo, pancetta y queso pecorino.", img: "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Fettuccine Alfredo", precio: "$4.300", desc: "Pasta ancha con salsa cremosa de mantequilla, parmesano y pimienta negra.", img: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Penne all'Arrabbiata", precio: "$3.900", desc: "Penne con salsa de tomate picante, ajo y perejil fresco.", img: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Gnocchi alla Sorrentina", precio: "$4.500", desc: "Ñoquis de papa con salsa de tomate, mozzarella y albahaca.", img: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Ravioli di Ricotta e Spinaci", precio: "$4.700", desc: "Raviolis rellenos de ricotta y espinacas con salsa de mantequilla y salvia.", img: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" }
+            ],
+            carnes: [
+                { nombre: "Osso Buco alla Milanese", precio: "$6.800", desc: "Estofado de jarrete de ternera con verduras y gremolata, servido con risotto.", img: "https://images.unsplash.com/photo-1588347818120-c20c33ffc7e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Saltimbocca alla Romana", precio: "$5.900", desc: "Lonjas de ternera con jamón crudo y salvia, cocinadas en vino blanco.", img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Branzino al Sale", precio: "$7.200", desc: "Lubina mediterránea cocida en costra de sal marina con hierbas aromáticas.", img: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Pollo alla Cacciatora", precio: "$5.200", desc: "Pollo estofado con tomate, vino tinto, aceitunas y hierbas aromáticas.", img: "https://images.unsplash.com/photo-1588347818120-c20c33ffc7e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" }
+            ],
+            postres: [
+                { nombre: "Panna Cotta ai Frutti di Bosco", precio: "$2.800", desc: "Crema cocida con salsa de frutos rojos y menta fresca.", img: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Cannoli Siciliani", precio: "$2.600", desc: "Tubos crujientes rellenos de ricotta dulce, chips de chocolate y pistachos.", img: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Gelato Artigianale", precio: "$2.200", desc: "Helado artesanal italiano. Sabores: Vainilla, Chocolate, Fresa o Pistacho.", img: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Affogato al Caffè", precio: "$2.400", desc: "Bola de helado de vainilla bañada con un shot de espresso caliente.", img: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" }
+            ],
+            bebidas: [
+                { nombre: "Vino Tinto - Chianti Classico", precio: "$8.500", desc: "Botella 750ml. Denominación de Origen Controlada y Garantizada.", img: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Vino Blanco - Pinot Grigio", precio: "$7.800", desc: "Botella 750ml. Fresco y afrutado, ideal para mariscos y pastas ligeras.", img: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Aperol Spritz", precio: "$2.800", desc: "Cóctel italiano refrescante con Aperol, prosecco y soda.", img: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Café Espresso", precio: "$900", desc: "Café espresso italiano tradicional, servido en taza pequeña.", img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Agua Mineral con/sin Gas", precio: "$800", desc: "Botella 500ml. San Pellegrino o Acqua Panna.", img: "https://images.unsplash.com/photo-1548839149-89c3bf1cfc38?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" }
+            ]
+        };
+
+        // Funcionalidad del menú hamburguesa
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                hamburger.innerHTML = navMenu.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Cerrar menú al hacer clic en un enlace
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // Header con scroll
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Cargar contenido del menú
+            function cargarMenu(categoria) {
+                const menuContent = document.getElementById('menu-content');
+                menuContent.innerHTML = '';
+                
+                menuData[categoria].forEach(item => {
+                    const menuItem = document.createElement('div');
+                    menuItem.className = 'menu-item';
+                    menuItem.innerHTML = `
+                        <div class="menu-item-img" style="background-image: url('${item.img}')"></div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-title">
+                                <div class="menu-item-name">${item.nombre}</div>
+                                <div class="menu-item-price">${item.precio}</div>
+                            </div>
+                            <div class="menu-item-desc">${item.desc}</div>
+                        </div>
+                    `;
+                    menuContent.appendChild(menuItem);
+                });
+            }
+            
+            // Cargar entradas por defecto
+            cargarMenu('entradas');
+            
+            // Cambiar categorías del menú
+            const categoriaBtns = document.querySelectorAll('.categoria-btn');
+            categoriaBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remover clase active de todos los botones
+                    categoriaBtns.forEach(b => b.classList.remove('active'));
+                    // Agregar clase active al botón clickeado
+                    this.classList.add('active');
+                    // Cargar la categoría correspondiente
+                    const categoria = this.getAttribute('data-categoria');
+                    cargarMenu(categoria);
+                });
+            });
+            
+            // Funcionalidad de pestañas de reservas
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Remover clase active de todos los botones y contenidos
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Agregar clase active al botón y contenido correspondiente
+                    this.classList.add('active');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+            
+            // Envío de formularios
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('¡Formulario enviado con éxito! En una implementación real, estos datos se enviarían al servidor.');
+                    this.reset();
+                });
+            });
+            
+            // Smooth scroll para enlaces ancla
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
