@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trattoria Bella Vita - Auténtica Cocina Italiana</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --color-primary: #8B0000;
@@ -25,6 +27,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Lora', serif;
             color: var(--color-text);
@@ -32,7 +38,12 @@
             line-height: 1.6;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: 'Playfair Display', serif;
             font-weight: 600;
             margin-bottom: 1rem;
@@ -208,11 +219,29 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: var(--transition);
+            position: relative;
         }
 
         .plato-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .plato-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(139, 0, 0, 0.1), rgba(212, 175, 55, 0.1));
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1;
+        }
+
+        .plato-card:hover::before {
+            opacity: 1;
         }
 
         .plato-img {
@@ -221,10 +250,17 @@
             background-color: #ddd;
             background-position: center;
             background-size: cover;
+            transition: var(--transition);
+        }
+
+        .plato-card:hover .plato-img {
+            transform: scale(1.05);
         }
 
         .plato-content {
             padding: 20px;
+            position: relative;
+            z-index: 2;
         }
 
         .plato-title {
@@ -263,7 +299,8 @@
             transition: var(--transition);
         }
 
-        .categoria-btn.active, .categoria-btn:hover {
+        .categoria-btn.active,
+        .categoria-btn:hover {
             background-color: var(--color-primary);
             color: var(--color-white);
         }
@@ -295,6 +332,11 @@
             background-position: center;
             background-size: cover;
             flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .menu-item:hover .menu-item-img {
+            transform: scale(1.1);
         }
 
         .menu-item-content {
@@ -493,6 +535,50 @@
             margin-bottom: 20px;
         }
 
+        /* WhatsApp Button */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+            text-decoration: none;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        .whatsapp-icon {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
         /* Footer */
         footer {
             background-color: var(--color-dark);
@@ -554,7 +640,9 @@
 
         /* Responsive */
         @media (max-width: 992px) {
-            .ubicacion-content, .contacto-content {
+
+            .ubicacion-content,
+            .contacto-content {
                 grid-template-columns: 1fr;
             }
 
@@ -616,19 +704,33 @@
                 font-size: 2rem;
             }
 
-            .platos-grid, .menu-grid {
+            .platos-grid,
+            .menu-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .whatsapp-button {
+                width: 50px;
+                height: 50px;
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .whatsapp-icon {
+                width: 25px;
+                height: 25px;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header id="header">
         <div class="container header-container">
             <a href="#" class="logo">Trattoria Bella Vita</a>
             <div class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
+                <span>☰</span>
             </div>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#inicio">Inicio</a></li>
@@ -645,7 +747,8 @@
     <section class="banner" id="inicio">
         <div class="banner-content">
             <h1>Auténtica cocina italiana en el corazón de Puerto Madero</h1>
-            <p>Disfruta de los sabores tradicionales de Italia en un ambiente cálido y acogedor, donde cada plato cuenta una historia de pasión y tradición.</p>
+            <p>Disfruta de los sabores tradicionales de Italia en un ambiente cálido y acogedor, donde cada plato cuenta
+                una historia de pasión y tradición.</p>
             <a href="#menu" class="btn">Ver Nuestro Menú</a>
         </div>
     </section>
@@ -656,34 +759,46 @@
             <h2 class="section-title">Nuestros Platos Más Pedidos</h2>
             <div class="platos-grid">
                 <div class="plato-card">
-                    <div class="plato-img" style="background-image: url('https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="plato-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1574894709920-11b28e7367e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');">
+                    </div>
                     <div class="plato-content">
                         <h3 class="plato-title">Lasagna alla Bolognese</h3>
-                        <p class="plato-desc">Deliciosas capas de pasta casera rellenas de carne, salsa boloñesa y queso, horneadas a la perfección.</p>
+                        <p class="plato-desc">Deliciosas capas de pasta casera rellenas de carne, salsa boloñesa y
+                            queso, horneadas a la perfección.</p>
                         <p class="plato-precio">$4.800</p>
                     </div>
                 </div>
                 <div class="plato-card">
-                    <div class="plato-img" style="background-image: url('https://images.unsplash.com/photo-1476124369491-e7addf5db371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="plato-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1476124369491-e7addf5db371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');">
+                    </div>
                     <div class="plato-content">
                         <h3 class="plato-title">Risotto ai Funghi</h3>
-                        <p class="plato-desc">Arroz cremoso cocinado con setas silvestres, vino blanco y queso parmesano, un clásico del norte de Italia.</p>
+                        <p class="plato-desc">Arroz cremoso cocinado con setas silvestres, vino blanco y queso
+                            parmesano, un clásico del norte de Italia.</p>
                         <p class="plato-precio">$4.200</p>
                     </div>
                 </div>
                 <div class="plato-card">
-                    <div class="plato-img" style="background-image: url('https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="plato-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');">
+                    </div>
                     <div class="plato-content">
                         <h3 class="plato-title">Tagliatelle al Pesto</h3>
-                        <p class="plato-desc">Pasta fresca con nuestra salsa pesto genovés, elaborada con albahaca fresca, piñones, ajo y aceite de oliva.</p>
+                        <p class="plato-desc">Pasta fresca con nuestra salsa pesto genovés, elaborada con albahaca
+                            fresca, piñones, ajo y aceite de oliva.</p>
                         <p class="plato-precio">$3.900</p>
                     </div>
                 </div>
                 <div class="plato-card">
-                    <div class="plato-img" style="background-image: url('https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="plato-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');">
+                    </div>
                     <div class="plato-content">
                         <h3 class="plato-title">Tiramisú Tradicional</h3>
-                        <p class="plato-desc">El postre italiano por excelencia: capas de bizcocho de soletilla empapado en café y crema de mascarpone.</p>
+                        <p class="plato-desc">El postre italiano por excelencia: capas de bizcocho de soletilla empapado
+                            en café y crema de mascarpone.</p>
                         <p class="plato-precio">$2.500</p>
                     </div>
                 </div>
@@ -715,14 +830,20 @@
             <div class="ubicacion-content">
                 <div class="ubicacion-info">
                     <h3>Ven a visitarnos</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Alicia Moreau de Justo 1052, Puerto Madero, Buenos Aires</p>
-                    <p><i class="fas fa-clock"></i> Lunes a Domingo: 12:00 a 00:00</p>
-                    <p><i class="fas fa-phone"></i> (011) 4313-4546</p>
-                    <p><i class="fas fa-envelope"></i> contacto@bellavita.com</p>
-                    <p>Ubicados en el exclusivo barrio de Puerto Madero, ofrecemos un ambiente refinado con vistas al dique y la mejor gastronomía italiana de la ciudad.</p>
+                    <p><span style="margin-right: 10px; color: var(--color-primary);">📍</span> Alicia Moreau de Justo
+                        1052, Puerto Madero, Buenos Aires</p>
+                    <p><span style="margin-right: 10px; color: var(--color-primary);">🕒</span> Lunes a Domingo: 12:00 a
+                        00:00</p>
+                    <p><span style="margin-right: 10px; color: var(--color-primary);">📞</span> (011) 4313-4546</p>
+                    <p><span style="margin-right: 10px; color: var(--color-primary);">✉️</span> contacto@bellavita.com
+                    </p>
+                    <p>Ubicados en el exclusivo barrio de Puerto Madero, ofrecemos un ambiente refinado con vistas al
+                        dique y la mejor gastronomía italiana de la ciudad.</p>
                 </div>
                 <div class="mapa">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.744905299535!2d-58.36384522420301!3d-34.61146545852752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a334d4f1d3812f%3A0x8b5c1b3b6b5b5b5b!2sPuerto%20Madero%2C%20CABA!5e0!3m2!1ses-419!2sar!4v1689200000000!5m2!1ses-419!2sar" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.744905299535!2d-58.36384522420301!3d-34.61146545852752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a334d4f1d3812f%3A0x8b5c1b3b6b5b5b5b!2sPuerto%20Madero%2C%20CABA!5e0!3m2!1ses-419!2sar!4v1689200000000!5m2!1ses-419!2sar"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
@@ -845,7 +966,7 @@
                     <h3>Ponte en contacto con nosotros</h3>
                     <div class="contacto-item">
                         <div class="contacto-icon">
-                            <i class="fas fa-phone"></i>
+                            <span>📞</span>
                         </div>
                         <div>
                             <h4>Teléfono</h4>
@@ -854,7 +975,7 @@
                     </div>
                     <div class="contacto-item">
                         <div class="contacto-icon">
-                            <i class="fas fa-envelope"></i>
+                            <span>✉️</span>
                         </div>
                         <div>
                             <h4>Correo Electrónico</h4>
@@ -863,7 +984,7 @@
                     </div>
                     <div class="contacto-item">
                         <div class="contacto-icon">
-                            <i class="fas fa-map-marker-alt"></i>
+                            <span>📍</span>
                         </div>
                         <div>
                             <h4>Dirección</h4>
@@ -872,18 +993,12 @@
                     </div>
                     <div class="contacto-item">
                         <div class="contacto-icon">
-                            <i class="fas fa-clock"></i>
+                            <span>🕒</span>
                         </div>
                         <div>
                             <h4>Horario</h4>
-                            <p>Lunes a Domingo: 12:00 a 00:00</p>
+                            <p>Lunes a Domingo: 12:00 a 23:00</p>
                         </div>
-                    </div>
-                    <div class="redes-sociales">
-                        <a href="#" class="red-social"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="red-social"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="red-social"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#" class="red-social"><i class="fab fa-tripadvisor"></i></a>
                     </div>
                 </div>
                 <div class="contacto-form">
@@ -917,7 +1032,9 @@
             <div class="footer-content">
                 <div class="footer-about">
                     <div class="footer-logo">Trattoria Bella Vita</div>
-                    <p class="footer-desc">Un espacio donde la tradición culinaria italiana se encuentra con la elegancia contemporánea. Cada plato es una experiencia que transporta directamente a las regiones de Italia.</p>
+                    <p class="footer-desc">Un espacio donde la tradición culinaria italiana se encuentra con la
+                        elegancia contemporánea. Cada plato es una experiencia que transporta directamente a las
+                        regiones de Italia.</p>
                 </div>
                 <div class="footer-links">
                     <h4>Enlaces Rápidos</h4>
@@ -946,65 +1063,73 @@
         </div>
     </footer>
 
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/5491143134546" class="whatsapp-button" target="_blank" aria-label="Contactar por WhatsApp">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893-.001-3.176-1.234-6.165-3.476-8.411" />
+        </svg>
+    </a>
+
     <script>
         // Datos del menú
         const menuData = {
             entradas: [
                 { nombre: "Bruschetta al Pomodoro", precio: "$2.500", desc: "Pan tostado con tomate fresco, albahaca y aceite de oliva extra virgen.", img: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-                { nombre: "Antipasto della Casa", precio: "$4.200", desc: "Selección de embutidos italianos, quesos y vegetales a la parrilla.", img: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-                { nombre: "Carpaccio di Manzo", precio: "$4.800", desc: "Finas láminas de lomo con rúcula, parmesano y alcaparras.", img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Antipasto della Casa", precio: "$4.200", desc: "Selección de embutidos italianos, quesos y vegetales a la parrilla.", img: "https://th.bing.com/th/id/R.c55a04e55588c2e66e544688bc3a8424?rik=MT48c4GkcjlRpQ&pid=ImgRaw&r=0" },
+                { nombre: "Carpaccio di Manzo", precio: "$4.800", desc: "Finas láminas de lomo con rúcula, parmesano y alcaparras.", img: "https://tse2.mm.bing.net/th/id/OIP.b1FTpVB0jEjI_C23FA0NJQHaEo?rs=1&pid=ImgDetMain&o=7&rm=3" },
                 { nombre: "Arancini di Riso", precio: "$3.200", desc: "Bolitas de arroz rellenas de queso mozzarella y guisantes, empanizadas y fritas.", img: "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" }
             ],
             pastas: [
-                { nombre: "Spaghetti Carbonara", precio: "$4.100", desc: "Spaghetti con salsa cremosa de huevo, pancetta y queso pecorino.", img: "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-                { nombre: "Fettuccine Alfredo", precio: "$4.300", desc: "Pasta ancha con salsa cremosa de mantequilla, parmesano y pimienta negra.", img: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-                { nombre: "Penne all'Arrabbiata", precio: "$3.900", desc: "Penne con salsa de tomate picante, ajo y perejil fresco.", img: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-                { nombre: "Gnocchi alla Sorrentina", precio: "$4.500", desc: "Ñoquis de papa con salsa de tomate, mozzarella y albahaca.", img: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-                { nombre: "Ravioli di Ricotta e Spinaci", precio: "$4.700", desc: "Raviolis rellenos de ricotta y espinacas con salsa de mantequilla y salvia.", img: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" }
+                { nombre: "Spaghetti Carbonara", precio: "$4.100", desc: "Spaghetti con salsa cremosa de huevo, pancetta y queso pecorino.", img: "https://images.unsplash.com/photo-1588013273468-315fd88ea34c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Fettuccine Alfredo", precio: "$4.300", desc: "Pasta ancha con salsa cremosa de mantequilla, parmesano y pimienta negra.", img: "https://th.bing.com/th/id/R.36d39c682c638a24b1f13ae1f42053ce?rik=%2flTM3o%2bGdEDQeQ&riu=http%3a%2f%2fwww.cookingclassy.com%2fwp-content%2fuploads%2f2012%2f12%2flight-fettucine-alfredo.jpg&ehk=WQR6%2fBo8xpilLZSmYhbE1dEtBDTEaMp%2bqlZWl5IJ0wc%3d&risl=&pid=ImgRaw&r=0" },
+                { nombre: "Penne all'Arrabbiata", precio: "$3.900", desc: "Penne con salsa de tomate picante, ajo y perejil fresco.", img: "https://theclevermeal.com/wp-content/uploads/2021/07/penne-arrabbiata_1b-799x1024.jpg" },
+                { nombre: "Gnocchi alla Sorrentina", precio: "$4.500", desc: "Ñoquis de papa con salsa de tomate, mozzarella y albahaca.", img: "https://www.insidetherustickitchen.com/wp-content/uploads/2020/07/Gnocchi-alla-Sorrentina-1200px-Inside-the-rustic-kitchen-1-768x1151.jpg" },
+                { nombre: "Ravioli di Ricotta e Spinaci", precio: "$4.700", desc: "Raviolis rellenos de ricotta y espinacas con salsa de mantequilla y salvia.", img: "https://tse3.mm.bing.net/th/id/OIP.GTMWAsj0DQp63MrA-3Kp7wHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" }
             ],
             carnes: [
-                { nombre: "Osso Buco alla Milanese", precio: "$6.800", desc: "Estofado de jarrete de ternera con verduras y gremolata, servido con risotto.", img: "https://images.unsplash.com/photo-1588347818120-c20c33ffc7e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-                { nombre: "Saltimbocca alla Romana", precio: "$5.900", desc: "Lonjas de ternera con jamón crudo y salvia, cocinadas en vino blanco.", img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Osso Buco alla Milanese", precio: "$6.800", desc: "Estofado de jarrete de ternera con verduras y gremolata, servido con risotto.", img: "https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Saltimbocca alla Romana", precio: "$5.900", desc: "Lonjas de ternera con jamón crudo y salvia, cocinadas en vino blanco.", img: "https://tse4.mm.bing.net/th/id/OIP.s5-RRthtjvSUe8Z3lAJz5gHaFj?rs=1&pid=ImgDetMain&o=7&rm=3" },
                 { nombre: "Branzino al Sale", precio: "$7.200", desc: "Lubina mediterránea cocida en costra de sal marina con hierbas aromáticas.", img: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-                { nombre: "Pollo alla Cacciatora", precio: "$5.200", desc: "Pollo estofado con tomate, vino tinto, aceitunas y hierbas aromáticas.", img: "https://images.unsplash.com/photo-1588347818120-c20c33ffc7e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" }
+                { nombre: "Pollo alla Cacciatora", precio: "$5.200", desc: "Pollo estofado con tomate, vino tinto, aceitunas y hierbas aromáticas.", img: "https://tse4.mm.bing.net/th/id/OIP.BccKXtmoVt0CH8IzP6lftAHaE7?rs=1&pid=ImgDetMain&o=7&rm=3" }
             ],
             postres: [
-                { nombre: "Panna Cotta ai Frutti di Bosco", precio: "$2.800", desc: "Crema cocida con salsa de frutos rojos y menta fresca.", img: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Panna Cotta ai Frutti di Bosco", precio: "$2.800", desc: "Crema cocida con salsa de frutos rojos y menta fresca.", img: "https://tse4.mm.bing.net/th/id/OIP.udZARveR1r8RT8z8ZKE2lwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" },
                 { nombre: "Cannoli Siciliani", precio: "$2.600", desc: "Tubos crujientes rellenos de ricotta dulce, chips de chocolate y pistachos.", img: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
                 { nombre: "Gelato Artigianale", precio: "$2.200", desc: "Helado artesanal italiano. Sabores: Vainilla, Chocolate, Fresa o Pistacho.", img: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-                { nombre: "Affogato al Caffè", precio: "$2.400", desc: "Bola de helado de vainilla bañada con un shot de espresso caliente.", img: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" }
+                { nombre: "Affogato al Caffè", precio: "$2.400", desc: "Bola de helado de vainilla bañada con un shot de espresso caliente.", img: "https://www.nonnabox.com/wp-content/uploads/2023/04/affogato_al_caffe_nonna_box_vertical3-1024x1536.jpg" }
             ],
             bebidas: [
-                { nombre: "Vino Tinto - Chianti Classico", precio: "$8.500", desc: "Botella 750ml. Denominación de Origen Controlada y Garantizada.", img: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-                { nombre: "Vino Blanco - Pinot Grigio", precio: "$7.800", desc: "Botella 750ml. Fresco y afrutado, ideal para mariscos y pastas ligeras.", img: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-                { nombre: "Aperol Spritz", precio: "$2.800", desc: "Cóctel italiano refrescante con Aperol, prosecco y soda.", img: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+                { nombre: "Vino Tinto - Chianti Classico", precio: "$8.500", desc: "Botella 750ml. Denominación de Origen Controlada y Garantizada.", img: "https://tse2.mm.bing.net/th/id/OIP.lvFJVX2-BSBHbuKX0CYHzwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" },
+                { nombre: "Vino Blanco - Pinot Grigio", precio: "$7.800", desc: "Botella 750ml. Fresco y afrutado, ideal para mariscos y pastas ligeras.", img: "https://tse4.mm.bing.net/th/id/OIP.-XghwefKBhPI-1eKmy1gnwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" },
+                { nombre: "Aperol Spritz", precio: "$2.800", desc: "Cóctel italiano refrescante con Aperol, prosecco y soda.", img: "https://www.inspiredtaste.net/wp-content/uploads/2023/11/Aperol-Spritz-Recipe-2-1200.jpg" },
                 { nombre: "Café Espresso", precio: "$900", desc: "Café espresso italiano tradicional, servido en taza pequeña.", img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-                { nombre: "Agua Mineral con/sin Gas", precio: "$800", desc: "Botella 500ml. San Pellegrino o Acqua Panna.", img: "https://images.unsplash.com/photo-1548839149-89c3bf1cfc38?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" }
+                { nombre: "Agua Mineral con/sin Gas", precio: "$800", desc: "Botella 500ml. San Pellegrino o Acqua Panna.", img: "https://i.pinimg.com/originals/6e/5b/85/6e5b85fa7f76ea72dd1ec9d39e75a642.jpg" }
             ]
         };
 
         // Funcionalidad del menú hamburguesa
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const hamburger = document.getElementById('hamburger');
             const navMenu = document.getElementById('nav-menu');
-            
-            hamburger.addEventListener('click', function() {
+
+            hamburger.addEventListener('click', function () {
                 navMenu.classList.toggle('active');
-                hamburger.innerHTML = navMenu.classList.contains('active') ? 
-                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                hamburger.innerHTML = navMenu.classList.contains('active') ?
+                    '<span>✕</span>' : '<span>☰</span>';
             });
-            
+
             // Cerrar menú al hacer clic en un enlace
             const navLinks = document.querySelectorAll('.nav-menu a');
             navLinks.forEach(link => {
-                link.addEventListener('click', function() {
+                link.addEventListener('click', function () {
                     navMenu.classList.remove('active');
-                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                    hamburger.innerHTML = '<span>☰</span>';
                 });
             });
-            
+
             // Header con scroll
-            window.addEventListener('scroll', function() {
+            window.addEventListener('scroll', function () {
                 const header = document.getElementById('header');
                 if (window.scrollY > 50) {
                     header.classList.add('scrolled');
@@ -1012,12 +1137,12 @@
                     header.classList.remove('scrolled');
                 }
             });
-            
+
             // Cargar contenido del menú
             function cargarMenu(categoria) {
                 const menuContent = document.getElementById('menu-content');
                 menuContent.innerHTML = '';
-                
+
                 menuData[categoria].forEach(item => {
                     const menuItem = document.createElement('div');
                     menuItem.className = 'menu-item';
@@ -1034,14 +1159,14 @@
                     menuContent.appendChild(menuItem);
                 });
             }
-            
+
             // Cargar entradas por defecto
             cargarMenu('entradas');
-            
+
             // Cambiar categorías del menú
             const categoriaBtns = document.querySelectorAll('.categoria-btn');
             categoriaBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     // Remover clase active de todos los botones
                     categoriaBtns.forEach(b => b.classList.remove('active'));
                     // Agregar clase active al botón clickeado
@@ -1051,46 +1176,49 @@
                     cargarMenu(categoria);
                 });
             });
-            
+
             // Funcionalidad de pestañas de reservas
             const tabBtns = document.querySelectorAll('.tab-btn');
             const tabContents = document.querySelectorAll('.tab-content');
-            
+
             tabBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     const tabId = this.getAttribute('data-tab');
-                    
+
                     // Remover clase active de todos los botones y contenidos
                     tabBtns.forEach(b => b.classList.remove('active'));
                     tabContents.forEach(c => c.classList.remove('active'));
-                    
+
                     // Agregar clase active al botón y contenido correspondiente
                     this.classList.add('active');
                     document.getElementById(`${tabId}-tab`).classList.add('active');
                 });
             });
-            
+
             // Envío de formularios
             const forms = document.querySelectorAll('form');
             forms.forEach(form => {
-                form.addEventListener('submit', function(e) {
+                form.addEventListener('submit', function (e) {
                     e.preventDefault();
                     alert('¡Formulario enviado con éxito! En una implementación real, estos datos se enviarían al servidor.');
                     this.reset();
                 });
             });
-            
-            // Smooth scroll para enlaces ancla
+
+            // Smooth scroll mejorado para enlaces ancla
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
+                anchor.addEventListener('click', function (e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
-                    
+
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
+                        const headerHeight = document.getElementById('header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+
                         window.scrollTo({
-                            top: targetElement.offsetTop - 80,
+                            top: targetPosition,
                             behavior: 'smooth'
                         });
                     }
@@ -1099,4 +1227,5 @@
         });
     </script>
 </body>
+
 </html>
