@@ -98,6 +98,14 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
+        .btn-secondary {
+            background-color: var(--color-secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-primary);
+        }
+
         /* Header */
         header {
             position: fixed;
@@ -472,6 +480,55 @@
             gap: 15px;
         }
 
+        /* Mis Reservas */
+        .mis-reservas {
+            background-color: var(--color-light);
+            text-align: center;
+        }
+
+        .reservas-lista {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .reserva-item {
+            background-color: var(--color-white);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .reserva-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .reserva-tipo {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .reserva-fecha {
+            font-weight: bold;
+            color: var(--color-dark);
+        }
+
+        .reserva-datos {
+            margin-bottom: 10px;
+        }
+
+        .reserva-acciones {
+            display: flex;
+            gap: 10px;
+        }
+
         /* Contacto */
         .contacto {
             background-color: var(--color-light);
@@ -689,6 +746,16 @@
             .footer-content {
                 grid-template-columns: 1fr;
             }
+
+            .reserva-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .reserva-acciones {
+                flex-direction: column;
+            }
         }
 
         @media (max-width: 576px) {
@@ -738,6 +805,7 @@
                 <li><a href="#menu">Menú</a></li>
                 <li><a href="#ubicacion">Ubicación</a></li>
                 <li><a href="#reservas">Reservas</a></li>
+                <li><a href="#mis-reservas">Mis Reservas</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </div>
@@ -894,6 +962,14 @@
                             <input type="text" id="nombre-comun" class="form-control" required>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="telefono-comun">Teléfono</label>
+                        <input type="tel" id="telefono-comun" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-comun">Correo Electrónico</label>
+                        <input type="email" id="email-comun" class="form-control" required>
+                    </div>
                     <button type="submit" class="btn">Enviar Reserva</button>
                 </form>
             </div>
@@ -947,12 +1023,33 @@
                             <input type="text" id="nombre-vip" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="sena-vip">Seña (monto)</label>
-                            <input type="number" id="sena-vip" class="form-control" required>
+                            <label for="telefono-vip">Teléfono</label>
+                            <input type="tel" id="telefono-vip" class="form-control" required>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-vip">Correo Electrónico</label>
+                        <input type="email" id="email-vip" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sena-vip">Seña (monto)</label>
+                        <input type="number" id="sena-vip" class="form-control" required>
                     </div>
                     <button type="submit" class="btn">Enviar Reserva VIP</button>
                 </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Mis Reservas -->
+    <section class="section mis-reservas" id="mis-reservas">
+        <div class="container">
+            <h2 class="section-title">Mis Reservas</h2>
+            <div style="text-align: center; margin-bottom: 30px;">
+                <button id="exportarReservas" class="btn btn-secondary">Exportar Reservas a TXT</button>
+            </div>
+            <div class="reservas-lista" id="reservas-lista">
+                <!-- Las reservas se cargarán aquí dinámicamente -->
             </div>
         </div>
     </section>
@@ -1044,6 +1141,7 @@
                         <li><a href="#menu">Menú</a></li>
                         <li><a href="#ubicacion">Ubicación</a></li>
                         <li><a href="#reservas">Reservas</a></li>
+                        <li><a href="#mis-reservas">Mis Reservas</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
@@ -1106,6 +1204,116 @@
                 { nombre: "Café Espresso", precio: "$900", desc: "Café espresso italiano tradicional, servido en taza pequeña.", img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
                 { nombre: "Agua Mineral con/sin Gas", precio: "$800", desc: "Botella 500ml. San Pellegrino o Acqua Panna.", img: "https://i.pinimg.com/originals/6e/5b/85/6e5b85fa7f76ea72dd1ec9d39e75a642.jpg" }
             ]
+        };
+
+        // Sistema de reservas
+        const ReservaManager = {
+
+            // Obtener todas las reservas
+            getReservas: function () {
+                return JSON.parse(localStorage.getItem('reservasTrattoria')) || [];
+            },
+
+            // Guardar una nueva reserva
+            guardarReserva: function (reserva) {
+                const reservas = this.getReservas();
+                reserva.id = Date.now().toString(); // ID único basado en timestamp
+                reservas.push(reserva);
+                localStorage.setItem('reservasTrattoria', JSON.stringify(reservas));
+                return reserva.id;
+            },
+
+            // Eliminar una reserva por ID
+            // Eliminar una reserva por ID
+            eliminarReserva: function (id) {
+                if (confirm('¿Estás seguro de que quieres cancelar esta reserva?')) {
+                    let reservas = this.getReservas();
+                    reservas = reservas.filter(reserva => reserva.id !== id);
+                    localStorage.setItem('reservasTrattoria', JSON.stringify(reservas));
+
+                    // Actualizar la vista
+                    this.mostrarReservas();
+
+                    alert('Reserva cancelada correctamente');
+                }
+            },
+
+            // Mostrar todas las reservas
+            mostrarReservas: function () {
+                const reservas = this.getReservas();
+                const lista = document.getElementById('reservas-lista');
+
+                if (reservas.length === 0) {
+                    lista.innerHTML = '<p>No tienes reservas guardadas.</p>';
+                    return;
+                }
+
+                lista.innerHTML = reservas.map(reserva => `
+                    <div class="reserva-item">
+                        <div class="reserva-header">
+                            <span class="reserva-tipo">${reserva.tipo === 'vip' ? 'VIP' : 'Común'}</span>
+                            <span class="reserva-fecha">${reserva.fecha} a las ${reserva.hora}</span>
+                        </div>
+                        <div class="reserva-datos">
+                            <p><strong>Nombre:</strong> ${reserva.nombre} ${reserva.apellido}</p>
+                            <p><strong>Personas:</strong> ${reserva.personas}</p>
+                            <p><strong>Teléfono:</strong> ${reserva.telefono}</p>
+                            <p><strong>Email:</strong> ${reserva.email}</p>
+                            ${reserva.tipo === 'vip' ? `<p><strong>Mesa:</strong> ${reserva.mesa}</p>` : ''}
+                            ${reserva.tipo === 'vip' && reserva.sena ? `<p><strong>Seña:</strong> $${reserva.sena}</p>` : ''}
+                        </div>
+                        <div class="reserva-acciones">
+                            <button class="btn btn-secondary" onclick="ReservaManager.eliminarReserva('${reserva.id}')">Cancelar Reserva</button>
+                        </div>
+                    </div>
+                `).join('');
+            },
+            // Exportar reservas a archivo TXT
+            exportarReservasTXT: function () {
+                const reservas = this.getReservas();
+
+                if (reservas.length === 0) {
+                    alert('No hay reservas para exportar.');
+                    return;
+                }
+
+                let contenidoTXT = 'RESERVAS - TRATTORIA BELLA VITA\n';
+                contenidoTXT += '===================================\n\n';
+
+                reservas.forEach((reserva, index) => {
+                    contenidoTXT += `RESERVA ${index + 1}:\n`;
+                    contenidoTXT += `Tipo: ${reserva.tipo === 'vip' ? 'VIP' : 'Común'}\n`;
+                    contenidoTXT += `Fecha: ${reserva.fecha}\n`;
+                    contenidoTXT += `Hora: ${reserva.hora}\n`;
+                    contenidoTXT += `Personas: ${reserva.personas}\n`;
+                    contenidoTXT += `Nombre: ${reserva.nombre} ${reserva.apellido}\n`;
+                    contenidoTXT += `Teléfono: ${reserva.telefono}\n`;
+                    contenidoTXT += `Email: ${reserva.email}\n`;
+                    if (reserva.tipo === 'vip') {
+                        contenidoTXT += `Mesa: ${reserva.mesa}\n`;
+                        if (reserva.sena) {
+                            contenidoTXT += `Seña: $${reserva.sena}\n`;
+                        }
+                    }
+                    contenidoTXT += '----------------------------------------\n\n';
+                });
+
+                contenidoTXT += `Total de reservas: ${reservas.length}\n`;
+                contenidoTXT += `Fecha de exportación: ${new Date().toLocaleDateString()}\n`;
+
+                // Crear y descargar archivo
+                const blob = new Blob([contenidoTXT], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `reservas_trattoria_${new Date().toISOString().split('T')[0]}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                alert(`Se han exportado ${reservas.length} reservas correctamente.`);
+            },
         };
 
         // Funcionalidad del menú hamburguesa
@@ -1195,14 +1403,56 @@
                 });
             });
 
-            // Envío de formularios
-            const forms = document.querySelectorAll('form');
-            forms.forEach(form => {
-                form.addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    alert('¡Formulario enviado con éxito! En una implementación real, estos datos se enviarían al servidor.');
-                    this.reset();
-                });
+            // Envío de formularios de reserva
+            document.getElementById('reserva-comun').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(this);
+                const reserva = {
+                    tipo: 'comun',
+                    fecha: document.getElementById('fecha-comun').value,
+                    hora: document.getElementById('hora-comun').value,
+                    personas: document.getElementById('personas-comun').value,
+                    apellido: document.getElementById('apellido-comun').value,
+                    nombre: document.getElementById('nombre-comun').value,
+                    telefono: document.getElementById('telefono-comun').value,
+                    email: document.getElementById('email-comun').value
+                };
+
+                ReservaManager.guardarReserva(reserva);
+                alert('¡Reserva común guardada con éxito!');
+                this.reset();
+                ReservaManager.mostrarReservas();
+            });
+
+            document.getElementById('reserva-vip').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const reserva = {
+                    tipo: 'vip',
+                    fecha: document.getElementById('fecha-vip').value,
+                    hora: document.getElementById('hora-vip').value,
+                    mesa: document.getElementById('mesa-vip').value,
+                    personas: document.getElementById('personas-vip').value,
+                    dni: document.getElementById('dni-vip').value,
+                    apellido: document.getElementById('apellido-vip').value,
+                    nombre: document.getElementById('nombre-vip').value,
+                    telefono: document.getElementById('telefono-vip').value,
+                    email: document.getElementById('email-vip').value,
+                    sena: document.getElementById('sena-vip').value
+                };
+
+                ReservaManager.guardarReserva(reserva);
+                alert('¡Reserva VIP guardada con éxito!');
+                this.reset();
+                ReservaManager.mostrarReservas();
+            });
+
+            // Envío de formulario de contacto
+            document.getElementById('form-contacto').addEventListener('submit', function (e) {
+                e.preventDefault();
+                alert('¡Mensaje enviado con éxito! Te contactaremos a la brevedad.');
+                this.reset();
             });
 
             // Smooth scroll mejorado para enlaces ancla
@@ -1223,6 +1473,13 @@
                         });
                     }
                 });
+            });
+
+            // Mostrar reservas al cargar la página
+            ReservaManager.mostrarReservas();
+            // Event listener para exportar reservas
+            document.getElementById('exportarReservas').addEventListener('click', function () {
+                ReservaManager.exportarReservasTXT();
             });
         });
     </script>
